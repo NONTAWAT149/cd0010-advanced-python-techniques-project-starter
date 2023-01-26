@@ -11,7 +11,7 @@ data on NEOs and close approaches extracted by `extract.load_neos` and
 
 You'll edit this file in Tasks 2 and 3.
 """
-
+from extract import load_neos, load_approaches
 
 class NEODatabase:
     """A database of near-Earth objects and their close approaches.
@@ -44,6 +44,16 @@ class NEODatabase:
 
         # TODO: What additional auxiliary data structures will be useful?
 
+        self.neo_data = load_neos(self._neos)
+        self.ca_data = load_approaches(self._approaches)
+
+        # Add designation data to neos data
+        for index, data in enumerate(self.neo_data):
+            data['des'] = data['pdes'] + ' ' + data['name']
+            self.neo_data[index]['des'] = data['des']
+
+        #print(self.neo_data[0])
+
         # TODO: Link together the NEOs and their close approaches.
 
     def get_neo_by_designation(self, designation):
@@ -60,7 +70,7 @@ class NEODatabase:
         :return: The `NearEarthObject` with the desired primary designation, or `None`.
         """
         # TODO: Fetch an NEO by its primary designation.
-        return None
+        return [data for data in self.neo_data if data['des'] == designation]
 
     def get_neo_by_name(self, name):
         """Find and return an NEO by its name.
@@ -77,7 +87,7 @@ class NEODatabase:
         :return: The `NearEarthObject` with the desired name, or `None`.
         """
         # TODO: Fetch an NEO by its name.
-        return None
+        return [data for data in self.neo_data if data['name'] == name]
 
     def query(self, filters=()):
         """Query close approaches to generate those that match a collection of filters.
