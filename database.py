@@ -53,8 +53,8 @@ class NEODatabase:
 
         for ca in self._approaches:
             neo = self._neos_designation[ca._designation]
-            ca.neo = neo
-            neo.approaches.append(ca)
+            ca.neo = neo # Update to CloseApproach.neo
+            neo.approaches.append(ca) # Update to NearEarthObject.approaches
 
 
     def get_neo_by_designation(self, designation):
