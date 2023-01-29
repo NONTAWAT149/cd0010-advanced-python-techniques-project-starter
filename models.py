@@ -63,7 +63,7 @@ class NearEarthObject:
             else:
                 self.hazardous = False
         else:
-            self.hazardous = None
+            self.hazardous = False
 
         if self.hazardous:
             self.hazardous_message = 'is'
