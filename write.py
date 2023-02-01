@@ -30,6 +30,17 @@ def write_to_csv(results, filename):
     )
     # TODO: Write the results to a CSV file, following the specification in the instructions.
 
+    with open(filename, 'w') as file:
+        contents = csv.DictWriter(file, lineterminator = '\n')
+        contents.writerow(fieldnames)
+        for line in results:
+            contents.writerow([line.time,
+                               line.distance,
+                               line.velocity,
+                               line.neo.designation,
+                               line.neo.name,
+                               line.newo.diameter,
+                               line.neo.hazardous])
 
 def write_to_json(results, filename):
     """Write an iterable of `CloseApproach` objects to a JSON file.
@@ -43,3 +54,19 @@ def write_to_json(results, filename):
     :param filename: A Path-like object pointing to where the data should be saved.
     """
     # TODO: Write the results to a JSON file, following the specification in the instructions.
+
+    ca_list = []
+
+    for ca_object in results:
+        ca_list.append({'datetime_utc': helpers.datetime_to_str(ca_object.time),
+                        'distance_au': ca_object.distance,
+                        'velocity_km_s': ca_object.velocity,
+                        'neo': {
+                                'designation': ca_object.neo.designation,
+                                'name': ca_object.neo.name,
+                                'diameter_km': ca_object.neo.diameter,
+                                'potentially_hazardous': ca_object.neo.hazardous}
+                        })
+
+    with open(filename, 'w') as file:
+        json.dump(ca_list, file)
