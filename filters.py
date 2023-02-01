@@ -162,7 +162,7 @@ def create_filters(
         filter_list.append(DiameterFilter(operator.ge, diameter_min))
 
     if diameter_max :
-        filter_list.append(DistanceFilter(operator.le, diameter_max))
+        filter_list.append(DiameterFilter(operator.le, diameter_max))
 
     if hazardous in (True, False):
         filter_list.append(HazardousFilter(operator.eq, hazardous))
