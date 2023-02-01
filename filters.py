@@ -158,10 +158,10 @@ def create_filters(
     if velocity_max:
         filter_list.append(VelocityFilter(operator.le, velocity_max))
 
-    if diameter_min:
+    if diameter_min :
         filter_list.append(DiameterFilter(operator.ge, diameter_min))
 
-    if diameter_max:
+    if diameter_max :
         filter_list.append(DistanceFilter(operator.le, diameter_max))
 
     if hazardous in (True, False):

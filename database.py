@@ -112,8 +112,12 @@ class NEODatabase:
         """
         # TODO: Generate `CloseApproach` objects that match all of the filters.
         for approach in self._approaches:
+            match_flag = True
             for filter in filters:
-                if filter(approach):
-                    yield approach
+                if not filter(approach):
+                    match_flag = False
+                    break
+            if match_flag:
+                yield approach
 
 
