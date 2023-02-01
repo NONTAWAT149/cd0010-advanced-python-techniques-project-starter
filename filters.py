@@ -72,27 +72,32 @@ class AttributeFilter:
         return f"{self.__class__.__name__}(op=operator.{self.op.__name__}, value={self.value})"
 
 class DateFilter(AttributeFilter):
+    """ Preparing data format for date filter"""
     @classmethod
     def get(cls, approach):
         return approach.time.date()
 
 
 class DistanceFilter(AttributeFilter):
+    """ Preparing data format for distance filter"""
     @classmethod
     def get(cls, approach):
         return approach.distance
 
 class VelocityFilter(AttributeFilter):
+    """ Preparing data format for velocity filter"""
     @classmethod
     def get(cls, approach):
         return approach.velocity
 
 class DiameterFilter(AttributeFilter):
+    """ Preparing data format for diameter filter"""
     @classmethod
     def get(cls, approach):
         return approach.neo.diameter
 
 class HazardousFilter(AttributeFilter):
+    """ Preparing data format for harzard filter"""
     @classmethod
     def get(cls, approach):
         return approach.neo.hazardous

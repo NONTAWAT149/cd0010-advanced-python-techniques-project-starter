@@ -55,8 +55,8 @@ def write_to_json(results, filename):
     """
     # TODO: Write the results to a JSON file, following the specification in the instructions.
 
+    # format data
     ca_list = []
-
     for ca_object in results:
         ca_list.append({'datetime_utc': helpers.datetime_to_str(ca_object.time),
                         'distance_au': ca_object.distance,
@@ -68,5 +68,6 @@ def write_to_json(results, filename):
                                 'potentially_hazardous': ca_object.neo.hazardous}
                         })
 
+    # export data to json file
     with open(filename, 'w') as file:
         json.dump(ca_list, file)
