@@ -12,7 +12,7 @@ You'll edit this file in Part 4.
 """
 import csv
 import json
-
+import helpers
 
 def write_to_csv(results, filename):
     """Write an iterable of `CloseApproach` objects to a CSV file.
@@ -31,16 +31,16 @@ def write_to_csv(results, filename):
     # TODO: Write the results to a CSV file, following the specification in the instructions.
 
     with open(filename, 'w') as file:
-        contents = csv.DictWriter(file, lineterminator = '\n')
-        contents.writerow(fieldnames)
+        contents = csv.DictWriter(file, fieldnames=fieldnames)
+        contents.writeheader()
         for line in results:
-            contents.writerow([line.time,
-                               line.distance,
-                               line.velocity,
-                               line.neo.designation,
-                               line.neo.name,
-                               line.newo.diameter,
-                               line.neo.hazardous])
+            contents.writerow({'datetime_utc': line.time,
+                               'distance_au': line.distance,
+                               'velocity_km_s': line.velocity,
+                               'designation': line.neo.designation,
+                               'name': line.neo.name,
+                               'diameter_km': line.neo.diameter,
+                               'potentially_hazardous': line.neo.hazardous})
 
 def write_to_json(results, filename):
     """Write an iterable of `CloseApproach` objects to a JSON file.
