@@ -38,6 +38,7 @@ class AttributeFilter:
     Concrete subclasses can override the `get` classmethod to provide custom
     behavior to fetch a desired attribute from the given `CloseApproach`.
     """
+
     def __init__(self, op, value):
         """Construct a new `AttributeFilter` from an binary predicate and a reference value.
 
@@ -69,37 +70,48 @@ class AttributeFilter:
         raise UnsupportedCriterionError
 
     def __repr__(self):
+        """Return information in machine readable."""
         return f"{self.__class__.__name__}(op=operator.{self.op.__name__}, value={self.value})"
 
 class DateFilter(AttributeFilter):
-    """ Preparing data format for date filter"""
+    """Preparing data format for date filter."""
+
     @classmethod
     def get(cls, approach):
+        """Return data in date format."""
         return approach.time.date()
 
 
 class DistanceFilter(AttributeFilter):
-    """ Preparing data format for distance filter"""
+    """Preparing data format for distance filter."""
+
     @classmethod
     def get(cls, approach):
+        """Return data in distance (float) format."""
         return approach.distance
 
 class VelocityFilter(AttributeFilter):
-    """ Preparing data format for velocity filter"""
+    """Preparing data format for velocity filter."""
+
     @classmethod
     def get(cls, approach):
+        """Return data in velocity (float) format."""
         return approach.velocity
 
 class DiameterFilter(AttributeFilter):
-    """ Preparing data format for diameter filter"""
+    """Preparing data format for diameter filter."""
+
     @classmethod
     def get(cls, approach):
+        """Return data in diameter (float) format."""
         return approach.neo.diameter
 
 class HazardousFilter(AttributeFilter):
-    """ Preparing data format for harzard filter"""
+    """Preparing data format for harzard filter."""
+
     @classmethod
     def get(cls, approach):
+        """Return data in boolean (True/False) format."""
         return approach.neo.hazardous
 
 
